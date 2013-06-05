@@ -62,8 +62,10 @@ std::wstring Parser::nextString(std::wstring breakers) {
 
 bool Parser::testCurChar(std::wstring chars) {
 	if (chars.find(curC) == std::wstring::npos) {
-		fwprintf(stderr, L"Parse error (%lf: %d, %d): \"%ls\" expected, but '%ls' found.\n", 
-			     fName.c_str(), row, col, chars.c_str(), curC == WEOF ? L"EOF" : std::wstring(1, curC).c_str());
+		fwprintf(stderr, L"Parse error (");
+		fprintf(stderr, "%s",  fName.c_str());
+		fwprintf(stderr, L": %d, %d): \"%ls\" expected, but '%ls' found.\n", 
+			     row, col, chars.c_str(), curC == WEOF ? L"EOF" : std::wstring(1, curC).c_str());
 		return false;
 	}
 	return true;
